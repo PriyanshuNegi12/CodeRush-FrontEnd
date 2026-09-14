@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="cyanToBlue1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E5FF" />
+      <stop offset="100%" stop-color="#0052FF" />
+    </linearGradient>
+
+    <linearGradient id="cyanToBlue2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00D2FF" />
+      <stop offset="100%" stop-color="#003BFF" />
+    </linearGradient>
+
+    <linearGradient id="topTipLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#80F2FF" />
+      <stop offset="100%" stop-color="#0088FF" />
+    </linearGradient>
+
+    <linearGradient id="topTipRight" x1="50%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00D2FF" />
+      <stop offset="100%" stop-color="#0044CC" />
+    </linearGradient>
+
+    <!-- Subtle Glow Filter -->
+    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <g filter="url(#neonGlow)">
+    <!-- Speed Lines (Bottom Left) -->
+    <g fill="url(#cyanToBlue1)">
+      <polygon points="120,360 215,360 205,368 120,368" opacity="0.9" />
+      <polygon points="110,380 225,380 215,388 110,388" opacity="0.85" />
+      <polygon points="105,398 285,398 275,406 105,406" opacity="0.95" />
+      <polygon points="110,414 260,414 250,420 110,420" opacity="0.75" />
+      <polygon points="125,428 210,428 200,432 125,432" opacity="0.6" />
+      <polygon points="135,440 180,440 175,442 135,442" opacity="0.4" />
+    </g>
+
+    <!-- Top Nose Cone Left -->
+    <polygon points="250,55 250,135 198,172 208,122" fill="url(#topTipLeft)" />
+    
+    <!-- Top Nose Cone Right -->
+    <polygon points="250,55 292,122 302,172 250,135" fill="url(#topTipRight)" />
+
+    <!-- Sub-nose Inner Shadow/Cut -->
+    <polygon points="250,135 208,122 198,172 250,185" fill="url(#cyanToBlue2)" opacity="0.7" />
+    <polygon points="250,135 292,122 302,172 250,185" fill="url(#cyanToBlue1)" opacity="0.9" />
+
+    <!-- Left Wing/Fin Outer -->
+    <polygon points="192,205 138,368 190,305 220,290" fill="url(#cyanToBlue1)" />
+    
+    <!-- Left Wing Inner Fragment -->
+    <polygon points="202,305 202,345 240,362 225,300" fill="url(#cyanToBlue2)" />
+
+    <!-- Right Wing/Fin Outer -->
+    <polygon points="308,205 362,368 310,305 280,290" fill="url(#cyanToBlue2)" />
+
+    <!-- Right Wing Inner Fragment -->
+    <polygon points="298,305 298,345 260,362 275,300" fill="url(#cyanToBlue1)" />
+
+    <!-- Center Code Bracket: Left '<' -->
+    <polygon points="215,205 165,250 215,295 230,278 195,250 230,222" fill="url(#cyanToBlue1)" />
+
+    <!-- Center Code Bracket: Right '>' -->
+    <polygon points="285,205 335,250 285,295 270,278 305,250 270,222" fill="url(#cyanToBlue2)" />
+
+    <!-- Center Code Bracket: Slash '/' -->
+    <polygon points="272,185 288,190 238,315 222,310" fill="url(#topTipLeft)" />
+
+    <!-- Bottom Engine / Nozzle Trim -->
+    <polygon points="232,368 268,368 260,398 240,398" fill="url(#cyanToBlue1)" />
+  </g>
+</svg>
