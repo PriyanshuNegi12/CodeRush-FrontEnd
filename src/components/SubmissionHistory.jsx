@@ -15,7 +15,13 @@ const SubmissionHistory = ({ problemId }) => {
       try {
         setLoading(true);
         const response = await axiosClient.get(`/problem/submittedProblem/${problemId}`);
-        setSubmissions(response.data);
+        
+        // Filter out invalid/placeholder submissions returned by the API
+        const validSubmissions = Array.isArray(response.data)
+          ? response.data.filter((sub) => sub && sub._id && sub.createdAt && sub.status)
+          : [];
+
+        setSubmissions(validSubmissions);
         setError(null);
       } catch (err) {
         setError('Failed to fetch submission history');
