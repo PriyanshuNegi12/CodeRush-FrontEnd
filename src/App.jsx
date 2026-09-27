@@ -15,14 +15,17 @@ import ProblemPage from "./pages/ProblemPage";
 
 function App() {
   const dispatch = useDispatch();
-  const {isAuthenticated,user,loading} = useSelector((state)=>state.auth);
-  
+  // NOTE: read `checkingAuth`, NOT `loading` — `loading` also flips true
+  // during registerUser/loginUser requests, which used to unmount the
+  // whole <Routes> tree (and SignupPage with it) mid-signup.
+  const {isAuthenticated, user, checkingAuth} = useSelector((state)=>state.auth);
+
   // check initial authentication
   useEffect(() => {
     dispatch(checkAuth());
   }, [dispatch]);
-  
-  if (loading) {
+
+  if (checkingAuth) {
     return <div className="min-h-screen flex items-center justify-center">
       <span className="loading loading-spinner loading-lg"></span>
     </div>;

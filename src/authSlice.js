@@ -71,7 +71,8 @@ const authSlice = createSlice({
   initialState: {
     user: null,
     isAuthenticated: false,
-    loading: false,
+    loading: false,      // drives register/login/logout button + spinner state
+    checkingAuth: true,  // NEW — only true during the initial checkAuth() on app boot
     error: null,
   },
   reducers: {},
@@ -84,7 +85,7 @@ const authSlice = createSlice({
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.loading = false;
-        // ✅ Only authenticate on step 2 (when backend returns a user)
+        // Only authenticate on step 2 (when backend returns a user)
         if (action.payload?.user) {
           state.isAuthenticated = true;
           state.user = action.payload.user;
@@ -116,17 +117,22 @@ const authSlice = createSlice({
       })
 
       // ---------- checkAuth ----------
+      // NOTE: uses `checkingAuth`, NOT `loading` — this is the fix.
+      // `loading` is shared with registerUser/loginUser, so if this used
+      // `loading` too, App.jsx's top-level spinner gate (driven by `loading`)
+      // would also fire during registerUser requests, unmounting whatever
+      // page was showing (e.g. SignupPage) mid-request.
       .addCase(checkAuth.pending, (state) => {
-        state.loading = true;
+        state.checkingAuth = true;
         state.error = null;
       })
       .addCase(checkAuth.fulfilled, (state, action) => {
-        state.loading = false;
+        state.checkingAuth = false;
         state.isAuthenticated = !!action.payload;
         state.user = action.payload;
       })
       .addCase(checkAuth.rejected, (state, action) => {
-        state.loading = false;
+        state.checkingAuth = false;
         state.error = action.payload || null;
         state.isAuthenticated = false;
         state.user = null;
